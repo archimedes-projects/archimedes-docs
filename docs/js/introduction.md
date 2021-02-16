@@ -1,5 +1,6 @@
 ---
 title: Introduction
+slug: /js
 ---
 
 Archimedes JS is a library implemented in TypeScript. There are three libraries:

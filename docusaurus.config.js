@@ -19,7 +19,7 @@ module.exports = {
         {
           docId: 'introduction',
           type: 'doc',
-          label: 'Docs',
+          label: 'General concepts',
           position: 'left'
         },
         {
@@ -81,7 +81,7 @@ module.exports = {
           ]
         }
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Archimedes, Inc. Built with Docusaurus.`
+      copyright: `Copyright © ${new Date().getFullYear()}`
     }
   },
   presets: [
@@ -90,12 +90,10 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
           editUrl: 'https://github.com/archimedes-projects/archimedes-docs/edit/master/website/'
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
           editUrl: 'https://github.com/archimedes-projects/edit/master/website/blog/'
         },
         theme: {
