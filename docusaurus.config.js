@@ -49,8 +49,16 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Style Guide',
+              label: 'General concepts',
               to: 'docs/'
+            },
+            {
+              label: 'JavaScript',
+              to: 'docs/js/'
+            },
+            {
+              label: 'Kotlin',
+              to: 'docs/kt/'
             }
           ]
         },
