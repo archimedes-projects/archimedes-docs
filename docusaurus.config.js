@@ -12,17 +12,29 @@ module.exports = {
     navbar: {
       title: 'Archimedes',
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg'
+        alt: 'Archimedes Logo',
+        src: 'img/logo.png'
       },
       items: [
         {
-          to: 'docs/',
-          activeBasePath: 'docs',
+          docId: 'introduction',
+          type: 'doc',
           label: 'Docs',
           position: 'left'
         },
-        { to: 'blog', label: 'Blog', position: 'left' },
+        {
+          label: 'JavaScript',
+          type: 'doc',
+          docId: 'js/introduction',
+          position: 'left'
+        },
+        {
+          label: 'Kotlin',
+          type: 'doc',
+          docId: 'kt/introduction',
+          position: 'left'
+        },
+        { to: 'blog', label: 'Blog', position: 'right' },
         {
           href: 'https://github.com/archimedes-projects',
           label: 'GitHub',

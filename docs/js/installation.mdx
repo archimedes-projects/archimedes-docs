@@ -1,0 +1,54 @@
+---
+title: Installation
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+You can install whatever packages you need:
+
+<Tabs
+  defaultValue="npm"
+  values={[
+    { label: 'npm', value: 'npm', },
+    { label: 'Yarn', value: 'yarn', },
+  ]
+}>
+  <TabItem value="npm">
+
+    ```bash
+    npm i @archimedes/utils -SE
+    npm i @archimedes/arch -SE
+    npm i @archimedes/components -SE
+    ```
+
+  </TabItem>
+  <TabItem value="yarn">
+
+    ```bash
+    yarn add @archimedes/utils -E
+    yarn add @archimedes/arch -E
+    yarn add @archimedes/components -E
+    ```
+
+  </TabItem>
+</Tabs>
+
+:::note
+
+We always recommend locking the dependencies by installing with the exact flag (--exact or -E).
+
+:::
+
+:::important
+
+If you want to use cache-link and your framework mangles the name of the classes (like Angular does) you should either disable that option or avoid using that link. For example, to disable that option in Angular when you build the application set `NG_BUILD_MANGLE=false` in the package.json's script.
+
+```json
+"scripts": {
+  "build": "NG_BUILD_MANGLE=false ng build",
+},
+
+```
+
+:::
