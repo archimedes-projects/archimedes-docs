@@ -1,4 +1,4 @@
-# [Archimedes Docs](https://archimedesfw.io/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/archimedes-projects/archimedes-docs/blob/master/LICENSE)
+# [Archimedes Docs](https://archimedesfw.io/) &middot; [![GitHub license](https://img.shields.io/badge/license-apache-blue.svg)](https://github.com/archimedes-projects/archimedes-docs/blob/master/LICENSE)
 
 ## Installation
 
