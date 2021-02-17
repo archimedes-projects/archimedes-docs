@@ -98,11 +98,11 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/archimedes-projects/archimedes-docs/edit/master/website/'
+          editUrl: 'https://github.com/archimedes-projects/archimedes-docs/edit/master/'
         },
         blog: {
           showReadingTime: true,
-          editUrl: 'https://github.com/archimedes-projects/edit/master/website/blog/'
+          editUrl: 'https://github.com/archimedes-projects/edit/master/blog/'
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css')
