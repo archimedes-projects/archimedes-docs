@@ -57,7 +57,7 @@ const Home: FC = () => {
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={cx('buttons')}>
             <Link className={clsx('button button--outline button--secondary button--lg')} to={useBaseUrl('docs/')}>
-              Get Started
+              General concepts
             </Link>
             <Link className={clsx('button button--outline button--lg')} to={useBaseUrl('docs/js/')}>
               JavaScript
