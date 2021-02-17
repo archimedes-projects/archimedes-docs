@@ -2,7 +2,7 @@ module.exports = {
   title: 'Archimedes',
   tagline: 'Give me a place to stand, and I shall move the earth.',
   url: 'https://archimedesfw.io',
-  baseUrl: 'archimedes-docs/',
+  baseUrl: '/archimedes-docs/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
