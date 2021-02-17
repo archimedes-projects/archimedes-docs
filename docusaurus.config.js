@@ -7,7 +7,7 @@ module.exports = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'archimedes-projects',
-  projectName: 'archimedes',
+  projectName: 'archimedes-docs',
   themeConfig: {
     navbar: {
       title: 'Archimedes',
