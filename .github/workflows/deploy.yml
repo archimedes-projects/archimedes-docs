@@ -20,11 +20,28 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+      - name: setup
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          echo "${{ secrets.GH_PAGES_DEPLOY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          cat <<EOT >> ~/.ssh/config
+          Host github.com
+          HostName github.com
+          IdentityFile ~/.ssh/id_rsa
+          EOT
       - name: install
         run: npm ci
       - name: build
         run: npm run build
       - name: deploy
         env:
-          GIT_USER: archimedes-ci
-        run: npm run deploy
+          USE_SSH: true
+          GIT_USER: git
+        run: |
+          git config --global user.email "ci@archimedesfw.io"
+          git config --global user.name "archimedes-ci"
+          npm run deploy
