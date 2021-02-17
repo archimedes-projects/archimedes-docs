@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://archimedesfw.io/blog</id>
+    <title>Archimedes Blog</title>
+    <updated>2021-02-09T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://archimedesfw.io/blog"/>
+    <subtitle>Archimedes Blog</subtitle>
+    <icon>https://archimedesfw.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Hello world]]></title>
+        <id>hello-world</id>
+        <link href="https://archimedesfw.io/blog/hello-world"/>
+        <updated>2021-02-09T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Welcome to this blog. This blog is created with Docusaurus 2 alpha.]]></summary>
+    </entry>
+</feed>
