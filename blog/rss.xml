@@ -9,7 +9,7 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
             <title><![CDATA[Hello world]]></title>
-            <link>https://archimedesfw.io/blog/hello-world</link>
+            <link>https://archimedesfw.io/archimedes-docs/blog/hello-world</link>
             <guid>hello-world</guid>
             <pubDate>Tue, 09 Feb 2021 00:00:00 GMT</pubDate>
             <description><![CDATA[Welcome to this blog. This blog is created with Docusaurus 2 alpha.]]></description>
