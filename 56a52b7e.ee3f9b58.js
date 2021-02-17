@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[12],{80:function(o){o.exports=JSON.parse('{"allTagsPath":"/archimedes-docs/blog/tags","slug":"hello","name":"hello","count":1,"permalink":"/archimedes-docs/blog/tags/hello"}')}}]);
