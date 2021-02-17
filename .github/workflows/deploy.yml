@@ -25,4 +25,6 @@ jobs:
       - name: build
         run: npm run build
       - name: deploy
+        env:
+          GIT_USER: archimedes-ci
         run: npm run deploy
