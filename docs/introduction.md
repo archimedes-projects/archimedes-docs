@@ -7,5 +7,5 @@ Archimedes is a set of libraries that improves your code by providing some archi
 
 Currently, there are two libraries:
 
-- [archimedes-js](/docs/js/introduction.md)
-- [archimedes-kt](/docs/kt/introduction.md)
+- [archimedes-js](/docs/js/)
+- [archimedes-kt](/docs/kt/)
