@@ -3,9 +3,9 @@ title: Introduction
 slug: /
 ---
 
-Archimedes is a set of libraries that improves your code by setting some architectural patterns like use cases, repositories and chain of responsibility.
+Archimedes is a set of libraries that improves your code by providing some architectural patterns like use cases, repositories and chain of responsibility.
 
-There are two libraries:
+Currently, there are two libraries:
 
-- archimedes-js
-- archimedes-kt
+- [archimedes-js](/docs/js/introduction.md)
+- [archimedes-kt](/docs/kt/introduction.md)

@@ -9,29 +9,30 @@ import { bind } from '../utils/bind'
 
 const features = [
   {
-    title: 'Easy to Use',
+    title: 'What is Archimedes?',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and used to get your website up and running
-        quickly.
+        Archimedes is a series of architectural concepts that are implemented in different languages. Using a given
+        Archimedes implementation provides a set of <strong>solid</strong> and <strong>flexible</strong> architectural
+        pieces.
       </>
     )
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Why should I use Archimedes?',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go ahead and move your docs into the{' '}
-        <code>docs</code> directory.
+        Because Archimedes will make your projects easier <strong>to reason with</strong>, easier to{' '}
+        <strong>change existing code</strong> and easier to <strong>add new functionalities.</strong>
       </>
     )
   },
   {
-    title: 'Powered by React',
+    title: 'How can I use Archimedes?',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can be extended while reusing the same
-        header and footer.
+        Read through the general concepts to understand on what are the concepts on which Archimede is based on and then
+        chose an implementation.
       </>
     )
   }
@@ -56,7 +57,7 @@ const Home: FC = () => {
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={cx('buttons')}>
-            <Link className={clsx('button button--outline button--secondary button--lg')} to={useBaseUrl('docs/')}>
+            <Link className={clsx('button button--secondary button--lg')} to={useBaseUrl('docs/')}>
               General concepts
             </Link>
             <Link className={clsx('button button--outline button--lg')} to={useBaseUrl('docs/js/')}>
