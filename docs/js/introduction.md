@@ -3,11 +3,11 @@ title: Introduction
 slug: /js
 ---
 
-Archimedes JS is a library implemented in TypeScript. There are three libraries:
+Archimedes JS is a library implemented in TypeScript. You can use it in JavaScript or TypeScript projects. There are three packages:
 
--   arch
--   utils
--   components
+-   [arch](arch.mdx)
+-   [utils](./utils.md)
+-   [components](./components.md)
 
 ## Arch
 
@@ -27,10 +27,12 @@ Different utilities to use:
 
 -   Maybe
 -   Datetime
+-   HttpClient
 -   Observer
+-   Extended Error
 -   Is Promise
--   Http Client
--   Extended error
+-   Types
+    -   Class
 
 ## Components
 

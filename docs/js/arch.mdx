@@ -2,6 +2,36 @@
 title: Arch
 ---
 
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+## Installation
+
+You can install whatever packages you need:
+
+<Tabs
+  defaultValue="npm"
+  values={[
+    { label: 'npm', value: 'npm', },
+    { label: 'Yarn', value: 'yarn', },
+  ]}
+>
+<TabItem value="npm">
+
+```bash
+npm i @archimedes/arch -SE
+```
+
+</TabItem>
+<TabItem value="yarn">
+
+```bash
+yarn add @archimedes/arch -E
+```
+
+</TabItem>
+</Tabs>
+
 ## Runner
 
 The runner configures a [chain of responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility) which allows a use case to be processed through links. In order to create the chain you have to do this as soon as possible in your app:
@@ -14,9 +44,9 @@ You can configure the chain however you can, even dynamically:
 
 ```ts
 if (isProduction) {
-    Runner.createChain([executorLink])
+  Runner.createChain([executorLink])
 } else {
-    Runner.createChain([executorLink, loggerLink])
+  Runner.createChain([executorLink, loggerLink])
 }
 ```
 
@@ -25,6 +55,17 @@ if (isProduction) {
 The `executor-link` is always required, even if you use the `cache-link`.
 
 :::
+
+A complete chain looks like this:
+
+```ts
+Runner.createChain([
+  new CacheLink(new CacheManager()),
+  new ExecutorLink(),
+  new LoggerLink(console),
+  new NotificationLink(new NotificationCenter())
+])
+```
 
 ## Links
 
@@ -43,6 +84,33 @@ BazQry
       42
 ```
 
+It receives an object that conforms the Logger interface:
+
+```ts
+export interface Logger {
+  log<T>(message: T): void
+}
+```
+
+For example, the `window.console` conforms that interface, so you can either use that:
+
+```ts
+// Local logger
+new LoggerLink(console)
+```
+
+or any other implementation, like a custom remote logger:
+
+```ts
+class RemoteLogger implements Logger {
+  log<T>(message: T): void {
+    fetch('remote.logger.com', { body: message })
+  }
+}
+
+new LoggerLink(new RemoteLogger())
+```
+
 ## NotificationLink
 
 This link is meant to capture errors occurred when executing a use case. This link should be placed after `ExecutorLink`. When an error occurs it will notify the `NotificationCenter`. From the UI you can subscribe to the `NotificationCenter` in order to show the user an error message:
@@ -52,12 +120,12 @@ import { NotificationCenter } from './notification-center'
 import { Subscriber } from './subscriber'
 
 class ErrorAlerter implements Subscriber {
-    update(publisher: NotificationCenter) {
-        publisher.notifications.map(x => ({
-            ...x,
-            message: x.message ?? 'Error'
-        }))
-    }
+  update(publisher: NotificationCenter) {
+    publisher.notifications.map(x => ({
+      ...x,
+      message: x.message ?? 'Error'
+    }))
+  }
 }
 
 new NotificationCenter().register(new ErrorAlerter())
@@ -72,13 +140,13 @@ You can automatically evict the cache of dependant use cases using the `EvictCac
 ```ts
 @EvictCache
 export class AQry extends Query {
-    constructor(private readonly bQry: BQry) {
-        super()
-    }
+  constructor(private readonly bQry: BQry) {
+    super()
+  }
 
-    async internalExecute() {
-        return this.bQry.execute()
-    }
+  async internalExecute() {
+    return this.bQry.execute()
+  }
 }
 ```
 
@@ -94,8 +162,8 @@ CacheInvalidations.set(FooCmd.name, [BarQry.name])
 
 You can also use these invalidation policies:
 
--   ALL: The use case will invalidate all the cache of all the use cases
--   NO_CACHE: The use case will never be cached
+- ALL: The use case will invalidate all the cache of all the use cases
+- NO_CACHE: The use case will never be cached
 
 ```ts
 CacheInvalidations.set(FooCmd.name, [InvalidationPolicy.ALL])
