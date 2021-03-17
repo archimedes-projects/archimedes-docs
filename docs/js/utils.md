@@ -44,6 +44,27 @@ You can use the `map` method to map an existing value to another one. If the May
 
 This utility improves Date handling. Every date you create is in UTC timezone.
 
+## HttpClient
+
+A simple [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) wrapper that has improved TypeScript support, middlewares and overall a simpler API than fetch.
+
+```typescript
+const httpClient = HttpClient.create({ baseUrl: 'http://localhost:8080' })
+httpClient.get('/users')
+```
+
 ## Observer
 
+This interface allows you to implement the [Observer pattern](https://refactoring.guru/design-patterns/observer).
 
+## Extended error
+
+Small utility to extend from when creating [custom errors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error#custom_error_types) in order to maintain proper stack trace for where our error was thrown (only available in V8):
+
+```ts
+export class CustomError extends ExtendedError {
+    constructor() {
+        super('This is a custom error')
+    }
+}
+```

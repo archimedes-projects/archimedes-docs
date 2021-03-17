@@ -31,8 +31,8 @@ const features = [
     title: 'How can I use Archimedes?',
     description: (
       <>
-        Read through the general concepts to understand on what are the concepts on which Archimede is based on and then
-        chose an implementation.
+        Read through the general concepts to understand on what are the concepts on which Archimedes is based on and
+        then chose an implementation.
       </>
     )
   }
