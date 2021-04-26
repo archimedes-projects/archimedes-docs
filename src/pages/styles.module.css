@@ -1,8 +1,22 @@
 .hero-banner {
-  padding: 4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  max-width: var(--ifm-container-width);
+  margin: 0 auto;
+  margin-bottom: 4rem;
+}
+
+.hero-container {
   text-align: center;
-  position: relative;
-  overflow: hidden;
+  margin-right: 2rem;
+}
+
+.hero-image {
+  width: 100%;
+  object-fit: contain;
+  height: 100%;
 }
 
 @media screen and (max-width: 966px) {

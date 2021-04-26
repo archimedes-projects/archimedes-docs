@@ -9,7 +9,7 @@ import { bind } from '../utils/bind'
 
 const features = [
   {
-    title: 'What is Archimedes?',
+    title: 'What?',
     description: (
       <>
         Archimedes is a series of architectural concepts that are implemented in different languages. Using a given
@@ -19,7 +19,7 @@ const features = [
     )
   },
   {
-    title: 'Why should I use Archimedes?',
+    title: 'Why?',
     description: (
       <>
         Because Archimedes will make your projects easier <strong>to reason with</strong>, easier to{' '}
@@ -28,11 +28,11 @@ const features = [
     )
   },
   {
-    title: 'How can I use Archimedes?',
+    title: 'How?',
     description: (
       <>
-        Read through the general concepts to understand on what are the concepts on which Archimedes is based on and
-        then chose an implementation.
+        Read through the <Link href="/docs">general concepts</Link> to understand on what are the concepts on which
+        Archimedes is based. Then, depending on your type of project, choose an implementation.
       </>
     )
   }
@@ -52,22 +52,23 @@ const Home: FC = () => {
   const { siteConfig = {} } = context
   return (
     <Layout title={siteConfig.title} description="Archimedes: Give me a place to stand, and I shall move the earth.">
-      <header className={clsx('hero hero--primary', cx('hero-banner'))}>
-        <div className="container">
+      <header className={cx('hero-banner')}>
+        <div className={cx('hero-container')}>
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={cx('buttons')}>
-            <Link className={clsx('button button--secondary button--lg')} to={useBaseUrl('docs/')}>
+            <Link className={clsx('button button--primary button--lg')} to={useBaseUrl('docs/')}>
               General concepts
             </Link>
-            <Link className={clsx('button button--outline button--lg')} to={useBaseUrl('docs/js/')}>
+            <Link className={clsx('button button--secondary button--lg')} to={useBaseUrl('docs/js/')}>
               JavaScript
             </Link>
-            <Link className={clsx('button button--outline button--lg')} to={useBaseUrl('docs/kt/')}>
+            <Link className={clsx('button button--secondary button--lg')} to={useBaseUrl('docs/kt/')}>
               Kotlin
             </Link>
           </div>
         </div>
+        <img className={cx('hero-image')} src="/img/development.svg" alt="Development" />
       </header>
       <main>
         <section className={cx('features')}>

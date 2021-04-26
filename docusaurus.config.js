@@ -10,10 +10,9 @@ module.exports = {
   projectName: 'archimedes-docs',
   themeConfig: {
     navbar: {
-      title: 'Archimedes',
       logo: {
         alt: 'Archimedes Logo',
-        src: 'img/logo.png'
+        src: 'img/logo.svg'
       },
       items: [
         {
