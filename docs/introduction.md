@@ -9,6 +9,5 @@ We recommend you read through the next sections as they explain some common arch
 
 However, if you want to jump directly to the code you can go to one of these links, depending on the language you are using:
 
-- [archimedes-js](/docs/js/)
-- [archimedes-kt](/docs/kt/)
-
+-   [archimedes-js](/docs/js/)
+-   [archimedes-kt](/docs/kt/)
