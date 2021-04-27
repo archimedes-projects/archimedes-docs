@@ -28,9 +28,9 @@ module.exports = {
           position: 'left'
         },
         {
-          label: 'Kotlin',
+          label: 'JVM',
           type: 'doc',
-          docId: 'kt/introduction',
+          docId: 'jvm/introduction',
           position: 'left'
         },
         { to: 'blog', label: 'Blog', position: 'right' },
@@ -56,8 +56,8 @@ module.exports = {
               to: 'docs/js/'
             },
             {
-              label: 'Kotlin',
-              to: 'docs/kt/'
+              label: 'JVM',
+              to: 'docs/jvm/'
             }
           ]
         },
@@ -88,7 +88,7 @@ module.exports = {
           ]
         }
       ],
-      copyright: `Copyright © ${new Date().getFullYear()}`
+      copyright: `Copyright © ${new Date().getFullYear()} Autentia Real Business Solutions S.L. All rights reserved.`
     }
   },
   presets: [
