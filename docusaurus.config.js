@@ -27,7 +27,6 @@ module.exports = {
           docId: 'jvm/introduction',
           position: 'left'
         },
-        { to: 'blog', label: 'Blog', position: 'right' },
         {
           href: 'https://github.com/archimedes-projects',
           label: 'GitHub',

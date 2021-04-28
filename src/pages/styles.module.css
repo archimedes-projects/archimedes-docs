@@ -19,6 +19,10 @@
   height: 100%;
 }
 
+html[data-theme='dark'] .hero-image {
+  filter: invert(88%) sepia(90%) saturate(2%) hue-rotate(188deg) brightness(111%) contrast(97%);
+}
+
 @media screen and (max-width: 966px) {
   .hero-banner {
     flex-direction: column-reverse;

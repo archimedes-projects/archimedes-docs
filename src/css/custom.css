@@ -23,3 +23,7 @@
 [alt='Archimedes Logo'] {
   margin-bottom: 10px;
 }
+
+html[data-theme='dark'] [alt='Archimedes Logo'] {
+  filter: invert(88%) sepia(90%) saturate(2%) hue-rotate(188deg) brightness(111%) contrast(97%);
+}
