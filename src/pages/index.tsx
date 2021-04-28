@@ -63,8 +63,8 @@ const Home: FC = () => {
             <Link className={clsx('button button--secondary button--lg')} to={useBaseUrl('docs/js/')}>
               JavaScript
             </Link>
-            <Link className={clsx('button button--secondary button--lg')} to={useBaseUrl('docs/kt/')}>
-              Kotlin
+            <Link className={clsx('button button--secondary button--lg')} to={useBaseUrl('docs/jvm/')}>
+              JVM
             </Link>
           </div>
         </div>

@@ -1,5 +1,5 @@
 module.exports = {
   docs: ['introduction', 'layers', 'use-cases', 'repositories'],
   js: ['js/introduction', 'js/installation', 'js/arch', 'js/utils', 'js/components'],
-  kt: ['kt/introduction']
+  jvm: ['jvm/introduction']
 }
