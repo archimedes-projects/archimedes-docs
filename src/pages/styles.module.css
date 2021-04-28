@@ -21,7 +21,7 @@
 
 @media screen and (max-width: 966px) {
   .hero-banner {
-    padding: 2rem;
+    flex-direction: column-reverse;
   }
 }
 

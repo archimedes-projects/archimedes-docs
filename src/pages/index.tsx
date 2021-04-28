@@ -7,37 +7,6 @@ import useBaseUrl from '@docusaurus/useBaseUrl'
 import styles from './styles.module.css'
 import { bind } from '../utils/bind'
 
-const features = [
-  {
-    title: 'What?',
-    description: (
-      <>
-        Archimedes is a series of architectural concepts that are implemented in different languages. Using a given
-        Archimedes implementation provides a set of <strong>solid</strong> and <strong>flexible</strong> architectural
-        pieces.
-      </>
-    )
-  },
-  {
-    title: 'Why?',
-    description: (
-      <>
-        Because Archimedes will make your projects easier <strong>to reason with</strong>, easier to{' '}
-        <strong>change existing code</strong> and easier to <strong>add new functionalities.</strong>
-      </>
-    )
-  },
-  {
-    title: 'How?',
-    description: (
-      <>
-        Read through the <Link href="/docs">general concepts</Link> to understand on what are the concepts on which
-        Archimedes is based. Then, depending on your type of project, choose an implementation.
-      </>
-    )
-  }
-]
-
 const Feature: FC<{ title: string; description: JSX.Element }> = ({ title, description }) => (
   <div className={clsx('col col--4', cx('feature'))}>
     <h3>{title}</h3>
@@ -50,6 +19,38 @@ const cx = bind(styles)
 const Home: FC = () => {
   const context = useDocusaurusContext()
   const { siteConfig = {} } = context
+
+  const features = [
+    {
+      title: 'What?',
+      description: (
+        <>
+          Archimedes is a series of architectural concepts that are implemented in different languages. Using a given
+          Archimedes implementation provides a set of <strong>solid</strong> and <strong>flexible</strong> architectural
+          pieces.
+        </>
+      )
+    },
+    {
+      title: 'Why?',
+      description: (
+        <>
+          Because Archimedes will make your projects easier <strong>to reason with</strong>, easier to{' '}
+          <strong>change existing code</strong> and easier to <strong>add new functionalities.</strong>
+        </>
+      )
+    },
+    {
+      title: 'How?',
+      description: (
+        <>
+          Depending on your type of project, choose an implementation:{' '}
+          <Link to={useBaseUrl('docs/js/')}>JavaScript</Link> or <Link to={useBaseUrl('docs/jvm/')}>JVM</Link>.
+        </>
+      )
+    }
+  ]
+
   return (
     <Layout title={siteConfig.title} description="Archimedes: Give me a place to stand, and I shall move the earth.">
       <header className={cx('hero-banner')}>
@@ -57,9 +58,6 @@ const Home: FC = () => {
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={cx('buttons')}>
-            <Link className={clsx('button button--primary button--lg')} to={useBaseUrl('docs/')}>
-              General concepts
-            </Link>
             <Link className={clsx('button button--secondary button--lg')} to={useBaseUrl('docs/js/')}>
               JavaScript
             </Link>

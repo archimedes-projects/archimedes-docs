@@ -4,6 +4,8 @@ This is the documentation for [archimedes](https://archimedesfw.io/). We use [Do
 
 ## Installation
 
+You should use [nvm](https://github.com/nvm-sh/nvm) and once inside the project run `nvm install` and `nvm use`.
+
 ```bash
 npm install
 ```

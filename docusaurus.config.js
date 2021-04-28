@@ -16,12 +16,6 @@ module.exports = {
       },
       items: [
         {
-          docId: 'introduction',
-          type: 'doc',
-          label: 'General concepts',
-          position: 'left'
-        },
-        {
           label: 'JavaScript',
           type: 'doc',
           docId: 'js/introduction',
@@ -47,10 +41,6 @@ module.exports = {
         {
           title: 'Docs',
           items: [
-            {
-              label: 'General concepts',
-              to: 'docs/'
-            },
             {
               label: 'JavaScript',
               to: 'docs/js/'
