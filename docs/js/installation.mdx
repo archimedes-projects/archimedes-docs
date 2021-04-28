@@ -39,16 +39,3 @@ yarn add @archimedes/components -E
 We always recommend locking the dependencies by installing with the exact flag (--exact or -E).
 
 :::
-
-:::important
-
-If you want to use cache-link and your framework mangles the name of the classes (like Angular does) you should either disable that option or avoid using that link. For example, to disable that option in Angular when you build the application set `NG_BUILD_MANGLE=false` in the package.json's script.
-
-```json
-"scripts": {
-  "build": "NG_BUILD_MANGLE=false ng build",
-},
-
-```
-
-:::

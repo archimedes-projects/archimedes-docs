@@ -4,14 +4,39 @@ title: Utils
 
 Archimedes has baked in some utils that are usually needed in most projects:
 
--   Maybe
--   Datetime
--   HttpClient
--   Observer
--   Extended Error
--   Is Promise
--   Types
-    -   Class
+- Maybe
+- Datetime
+- HttpClient
+- Observer
+- Extended Error
+- Is Promise
+- Types
+  - Class
+
+## Installation
+
+<Tabs
+defaultValue="npm"
+values={[
+{ label: 'npm', value: 'npm', },
+{ label: 'Yarn', value: 'yarn', },
+]}
+>
+  <TabItem value="npm">
+
+    ```bash
+    npm i @archimedes/utils -SE
+    ```
+
+  </TabItem>
+  <TabItem value="yarn">
+
+    ```bash
+    yarn add @archimedes/utils -E
+    ```
+
+  </TabItem>
+</Tabs>
 
 ## Maybe
 
@@ -63,8 +88,8 @@ Small utility to extend from when creating [custom errors](https://developer.moz
 
 ```ts
 export class CustomError extends ExtendedError {
-    constructor() {
-        super('This is a custom error')
-    }
+  constructor() {
+    super('This is a custom error')
+  }
 }
 ```

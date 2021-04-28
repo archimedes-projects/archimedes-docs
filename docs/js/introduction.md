@@ -3,40 +3,20 @@ title: Introduction
 slug: /js
 ---
 
-Archimedes JS is a library implemented in TypeScript. You can use it in JavaScript or TypeScript projects. There are three packages:
+Archimedes JS is a library implemented in [TypeScript](https://www.typescriptlang.org/). You can use it in JavaScript or TypeScript projects. There are three packages:
 
--   [arch](arch.mdx)
--   [utils](./utils.md)
--   [components](./components.md)
+-   [arch](./arch.mdx)
+-   [utils](./utils.mdx)
+-   [components](./components.mdx)
 
 ## Arch
 
-Different architectural pieces to use:
-
--   Use Cases
--   Commands
--   Queries
--   Runner
--   Links
--   Cache
--   Notifications
+Different architectural pieces to use.
 
 ## Utils
 
-Different utilities to use:
-
--   Maybe
--   Datetime
--   HttpClient
--   Observer
--   Extended Error
--   Is Promise
--   Types
-    -   Class
+Several common utilities.
 
 ## Components
 
-Headless component library made in Stencil and utilities to create accesible components. It includes the following components:
-
--   Swiper
--   Toast
+Headless component library made in Stencil and utilities to create accesible components.
