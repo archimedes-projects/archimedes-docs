@@ -55,18 +55,18 @@ const Home: FC = () => {
     <Layout title={siteConfig.title} description="Archimedes: Give me a place to stand, and I shall move the earth.">
       <header className={cx('hero-banner')}>
         <div className={cx('hero-container')}>
-          <h1 className="hero__title">{siteConfig.title}</h1>
+          <img className={cx('hero-image')} src="/img/logo.svg" alt="Logo Archimedes" />
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={cx('buttons')}>
-            <Link className={clsx('button button--secondary button--lg')} to={useBaseUrl('docs/js/')}>
+            <Link className={clsx('button button--primary button--lg')} to={useBaseUrl('docs/js/')}>
               JavaScript
             </Link>
-            <Link className={clsx('button button--secondary button--lg')} to={useBaseUrl('docs/jvm/')}>
+            <Link className={clsx('button button--primary button--lg')} to={useBaseUrl('docs/jvm/')}>
               JVM
             </Link>
           </div>
         </div>
-        <img className={cx('hero-image')} src="/img/development.svg" alt="Development" />
+        <img className={cx('hero-image')} src="/img/archimedes-lever.svg" alt="Archimedes lever" />
       </header>
       <main>
         <section className={cx('features')}>

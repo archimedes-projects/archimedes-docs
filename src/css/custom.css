@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
 
 :root {
-  --ifm-color-primary: #308be8;
-  --ifm-color-primary-dark: rgb(33, 175, 144);
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
-  --ifm-color-primary-light: rgb(70, 203, 174);
-  --ifm-color-primary-lighter: rgb(102, 212, 189);
-  --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-color-primary: hsl(210, 80%, 55%);
+  --ifm-color-primary-dark: hsl(210, 80%, 45%);
+  --ifm-color-primary-darker: hsl(210, 80%, 40%);
+  --ifm-color-primary-darkest: hsl(210, 80%, 35%);
+  --ifm-color-primary-light: hsl(210, 80%, 65%);
+  --ifm-color-primary-lighter: hsl(210, 80%, 70%);
+  --ifm-color-primary-lightest: hsl(210, 80%, 75%);
   --ifm-code-font-size: 95%;
   --ifm-font-family-monospace: 'JetBrains Regular', sans-serif;
   --ifm-font-family-base: 'JetBrains Regular', sans-serif;
