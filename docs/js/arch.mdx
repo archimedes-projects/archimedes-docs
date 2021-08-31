@@ -163,6 +163,44 @@ const bazQry = new BazCmd()
 await bazQry.execute() // 'Hello world!
 ```
 
+### Subscribe
+
+Sometimes you might want to execute some logic whenever a Query or a Command has executed:
+
+```ts
+import { Query } from '@archimedes/arch'
+
+export class FooQry extends Query<number> {
+  async internalExecute(): Promise<number> {
+    return 42
+  }
+}
+
+let called = false
+const fooQry = new FooQry()
+fooQry.subscribe(() => (called = true))
+await fooQry.execute()
+called // true
+```
+
+When you subscribe a unique id is returned. This id is used to unsubscribe.
+
+```ts
+let calls = 0
+const fooQry = new FooQry()
+const id = fooQry.subscribe(() => calls++)
+await fooQry.execute()
+fooQry.unsubscribe(id)
+await fooQry.execute()
+calls // 1
+```
+
+::: important
+
+Remember to unsubscribe when finished with a use case, if not you might have memory leaks!
+
+:::
+
 ### Execution Options
 
 When you execute a use case you can pass options as the second parameter:
