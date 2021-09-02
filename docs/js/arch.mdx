@@ -43,45 +43,6 @@ If you want to use cache-link and your framework mangles the name of the classes
 
 :::
 
-## Runner
-
-The runner configures a [chain of responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility) which allows a use case to be processed through links.
-
-:::note
-
-Use cases represent what a user of the system can do with said system.
-
-:::
-
-This means that for each action the user performs in your app you can execute arbitrary code, like for example: logging the request, caching data, handling errors and much more in a **flexible** yet **robust** way.
-
-In order to create the chain you have to do this **as soon as possible** in your app:
-
-```ts
-Runner.createChain([new ExecutorLink(), new LoggerLink(console)])
-```
-
-You can configure the chain however you want, even dynamically:
-
-```ts
-if (isProduction) {
-  Runner.createChain([new ExecutorLink()])
-} else {
-  Runner.createChain([new ExecutorLink(), new LoggerLink(console)])
-}
-```
-
-A complete chain looks like this:
-
-```ts
-Runner.createChain([
-  new CacheLink(new CacheManager()),
-  new ExecutorLink(),
-  new LoggerLink(console),
-  new NotificationLink(new NotificationCenter())
-])
-```
-
 ## Use cases
 
 In archimedes we differentiate between **queries** and **commands**.
@@ -244,6 +205,60 @@ await quxQry.execute(undefined, {
 })
 ```
 
+## Runner
+
+The runner configures a [chain of responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility) which allows a use case to be processed through links.
+
+This means that for each action the user performs in your app you can execute arbitrary code, like for example: logging the request, caching data, handling errors and much more in a **flexible** yet **robust** way.
+
+In order to create the chain you have to do this **as soon as possible** in your app:
+
+```ts
+Runner.createChain([new ExecutorLink(), new LoggerLink(console)])
+```
+
+You can configure the chain however you want, even dynamically:
+
+```ts
+if (isProduction) {
+  Runner.createChain([new ExecutorLink()])
+} else {
+  Runner.createChain([new ExecutorLink(), new LoggerLink(console)])
+}
+```
+
+A complete chain looks like this:
+
+```ts
+Runner.createChain([
+  new CacheLink(new CacheManager()),
+  new ExecutorLink(),
+  new LoggerLink(console),
+  new NotificationLink(new NotificationCenter())
+])
+```
+
+Now, when you create a use case like follows:
+
+```ts
+import { Query } from '@archimedes/arch'
+
+export class FooQry extends Query<number> {
+  async internalExecute(): Promise<number> {
+    return 42
+  }
+}
+```
+
+And execute it:
+
+```ts
+const fooQry = new FooQry()
+await fooQry.execute()
+```
+
+The use case will be cached, executed, a log will be shown with the result, the date and if an error happens, the notification center will be notified. And there is even more! You can create [custom links]().
+
 ## Links
 
 ## ExecutorLink
@@ -309,6 +324,8 @@ new NotificationCenter().register(new ErrorAlerter())
 
 If you want a use case not to show an error when it fails you can execute the use case with the `inlineError` defined in the [execution options](#execution-options)
 
+## Cache
+
 ### CacheLink
 
 :::important
@@ -317,7 +334,7 @@ The `executor-link` is always required, even if you use the `cache-link`.
 
 :::
 
-#### Cache eviction
+### Cache eviction
 
 You can automatically evict the cache of dependant use cases using the `EvictCache` decorator in conjunction with the `cache-link` link. If use case `a` depends on use case `b`, and use case `b` depends on use case `c` (`a` ➡ `b` ➡ `c`️) if we invalidate the cache of use case `a` we should evict the cache of use case `b` and `c` too. We should add this decorator to all use cases we want this handled.
 
@@ -338,7 +355,7 @@ export class AQry extends Query {
 It's important to activate `emitDecoratorMetadata` to true in the `tsconfig.json` compiler's options. See the `examples` directory for more information.
 :::
 
-#### Cache invalidations
+### Cache invalidations
 
 If you want to set that certain commands or queries invalidate the cache of other commands and queries you can set the cache invalidations the `CacheInvalidations` class:
 
@@ -362,3 +379,33 @@ This link throws an error when is called.
 ## EmptyLink
 
 This link does nothing when called.
+
+## Custom links
+
+You can create your own custom links by extending the [BaseLink](https://github.com/archimedes-projects/archimedes-js/blob/0f9c51ac387e9bdb59e5cae911ef04c9b3b55acd/packages/arch/src/runner/links/base-link.ts) class. For instance imagine if we wanted to create a link that starts a spinner when executing an use case:
+
+```ts
+import { BaseLink } from './base-link'
+import { Context } from './context'
+import { Loading } from '../loading/loading'
+
+export class LoadingLink extends BaseLink {
+  constructor(private readonly loading: Loading) {
+    super()
+  }
+
+  next(context: Context): void {
+    this.loading.start()
+    context.result = context.result?.finally(() => {
+      this.loading.end()
+    })
+    this.nextLink.next(context)
+  }
+}
+```
+
+And then register it in the runner:
+
+```ts
+Runner.createChain([new LoadingLink(new Loading()), new ExecutorLink()])
+```
