@@ -221,6 +221,29 @@ await quxQry.execute(undefined, {
 })
 ```
 
+You can define your own execution options typings by creating a `index.d.ts` in the root of your project with the following contents:
+
+```ts
+import '@archimedes/arch'
+
+declare module '@archimedes/arch' {
+  interface ExecutionOptions {
+    extraOption: string
+    inlineError: boolean
+  }
+}
+```
+
+If you do so, you can have a type safe way to pass custom options:
+
+```ts
+const quxQry = new QuxCmd()
+await quxQry.execute(undefined, {
+  inlineError: true,
+  extraOption: 'foo'
+})
+```
+
 ## Links
 
 ## ExecutorLink
