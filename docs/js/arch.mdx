@@ -144,6 +144,27 @@ await fooQry.execute()
 called // true
 ```
 
+In the subscribe callback you can receive additional information like the `param` used to execute the use case, the `result` and the `executionOptions`:
+
+```ts
+import { Query } from '@archimedes/arch'
+
+export class FooQry extends Query<number> {
+  async internalExecute(): Promise<number> {
+    return 42
+  }
+}
+
+let called = false
+const fooQry = new FooQry()
+fooQry.subscribe(({ param, result, executionOptions }) => {
+  console.log(param, result, executionOptions)
+  called = true
+})
+await fooQry.execute()
+called // true
+```
+
 When you subscribe a unique id is returned. This id is used to unsubscribe.
 
 ```ts
