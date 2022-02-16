@@ -226,32 +226,32 @@ await quxQry.execute(undefined, {
 })
 ```
 
-## Runner
+## Chain of responsibility
 
-The runner configures a [chain of responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility) which allows a use case to be processed through links.
+Archimedes configures a [chain of responsibility](https://refactoring.guru/design-patterns/chain-of-responsibility) which allows a use case to be processed through links.
 
 This means that for each action the user performs in your app you can execute arbitrary code, like for example: logging the request, caching data, handling errors and much more in a **flexible** yet **robust** way.
 
 In order to create the chain you have to do this **as soon as possible** in your app:
 
 ```ts
-Runner.createChain([new ExecutorLink(), new LoggerLink(console)])
+Archimedes.createChain([new ExecutorLink(), new LoggerLink(console)])
 ```
 
 You can configure the chain however you want, even dynamically:
 
 ```ts
 if (isProduction) {
-  Runner.createChain([new ExecutorLink()])
+  Archimedes.createChain([new ExecutorLink()])
 } else {
-  Runner.createChain([new ExecutorLink(), new LoggerLink(console)])
+  Archimedes.createChain([new ExecutorLink(), new LoggerLink(console)])
 }
 ```
 
 A complete chain looks like this:
 
 ```ts
-Runner.createChain([
+Archimedes.createChain([
   new CacheLink(new CacheManager()),
   new ExecutorLink(),
   new LoggerLink(console),
@@ -355,12 +355,12 @@ The `executor-link` is always required, even if you use the `cache-link`.
 
 :::
 
-### Cache eviction
+### Invalidate cache
 
-You can automatically evict the cache of dependant use cases using the `EvictCache` decorator in conjunction with the `cache-link` link. If use case `a` depends on use case `b`, and use case `b` depends on use case `c` (`a` ➡ `b` ➡ `c`️) if we invalidate the cache of use case `a` we should evict the cache of use case `b` and `c` too. We should add this decorator to all use cases we want this handled.
+You can automatically evict the cache of dependant use cases using the `InvalidateCache` decorator in conjunction with the `cache-link` link. If use case `a` depends on use case `b`, and use case `b` depends on use case `c` (`a` ➡ `b` ➡ `c`️) if we invalidate the cache of use case `a` we should invalidate the cache of use case `b` and `c` too. We should add this decorator to all use cases we want this handled.
 
 ```ts
-@EvictCache
+@InvalidateCache
 export class AQry extends Query {
   constructor(private readonly bQry: BQry) {
     super()
@@ -403,7 +403,7 @@ This link does nothing when called.
 
 ## Custom links
 
-You can create your own custom links by extending the [BaseLink](https://github.com/archimedes-projects/archimedes-js/blob/0f9c51ac387e9bdb59e5cae911ef04c9b3b55acd/packages/arch/src/runner/links/base-link.ts) class. For instance imagine if we wanted to create a link that starts a spinner when executing an use case:
+You can create your own custom links by extending the [BaseLink](https://github.com/archimedes-projects/archimedes-js/blob/main/packages/arch/src/runner/links/base-link.ts) class. For instance imagine if we wanted to create a link that starts a spinner when executing an use case:
 
 ```ts
 import { BaseLink } from './base-link'
@@ -415,7 +415,7 @@ export class LoadingLink extends BaseLink {
     super()
   }
 
-  next(context: Context): void {
+  async next(context: Context): Promise<void> {
     this.loading.start()
     context.result = context.result?.finally(() => {
       this.loading.end()
@@ -425,8 +425,8 @@ export class LoadingLink extends BaseLink {
 }
 ```
 
-And then register it in the runner:
+And then register it in the chain of responsibility:
 
 ```ts
-Runner.createChain([new LoadingLink(new Loading()), new ExecutorLink()])
+Archimedes.createChain([new LoadingLink(new Loading()), new ExecutorLink()])
 ```
