@@ -282,11 +282,11 @@ The use case will be cached, executed, a log will be shown with the result, the 
 
 ## Links
 
-## ExecutorLink
+### ExecutorLink
 
 This link merely executes the use case. It is always needed if you want to execute the use cases.
 
-## LoggerLink
+### LoggerLink
 
 This link logs information about the execution of the use case, like parameters, result and name of the use case:
 
@@ -324,7 +324,7 @@ class RemoteLogger implements Logger {
 new LoggerLink(new RemoteLogger())
 ```
 
-## NotificationLink
+### NotificationLink
 
 This link is meant to capture errors occurred when executing a use case. This link should be placed after `ExecutorLink`. When an error occurs it will notify the `NotificationCenter`. From the UI you can subscribe to the `NotificationCenter` in order to show the user an error message:
 
@@ -345,15 +345,55 @@ new NotificationCenter().register(new ErrorAlerter())
 
 If you want a use case not to show an error when it fails you can execute the use case with the `inlineError` defined in the [execution options](#execution-options)
 
-## Cache
-
 ### CacheLink
+
+This link caches the results for all queries with all parameters combination. To learn more about cache move to [cache section](#cache).
 
 :::important
 
 The `executor-link` is always required, even if you use the `cache-link`.
 
 :::
+
+### NullLink
+
+This link throws an error when is called.
+
+### EmptyLink
+
+This link does nothing when called.
+
+### Custom links
+
+You can create your own custom links by extending the [BaseLink](https://github.com/archimedes-projects/archimedes-js/blob/main/packages/arch/src/runner/links/base-link.ts) class. For instance imagine if we wanted to create a link that starts a spinner when executing an use case:
+
+```ts
+import { BaseLink } from './base-link'
+import { Context } from './context'
+import { Loading } from '../loading/loading'
+
+export class LoadingLink extends BaseLink {
+  constructor(private readonly loading: Loading) {
+    super()
+  }
+
+  async next(context: Context): Promise<void> {
+    this.loading.start()
+    context.result = context.result?.finally(() => {
+      this.loading.end()
+    })
+    this.nextLink.next(context)
+  }
+}
+```
+
+And then register it in the chain of responsibility:
+
+```ts
+Archimedes.createChain([new LoadingLink(new Loading()), new ExecutorLink()])
+```
+
+## Cache
 
 ### Invalidate cache
 
@@ -393,40 +433,3 @@ You can also use these invalidation policies:
 CacheInvalidations.set(FooCmd.name, [InvalidationPolicy.ALL])
 ```
 
-## NullLink
-
-This link throws an error when is called.
-
-## EmptyLink
-
-This link does nothing when called.
-
-## Custom links
-
-You can create your own custom links by extending the [BaseLink](https://github.com/archimedes-projects/archimedes-js/blob/main/packages/arch/src/runner/links/base-link.ts) class. For instance imagine if we wanted to create a link that starts a spinner when executing an use case:
-
-```ts
-import { BaseLink } from './base-link'
-import { Context } from './context'
-import { Loading } from '../loading/loading'
-
-export class LoadingLink extends BaseLink {
-  constructor(private readonly loading: Loading) {
-    super()
-  }
-
-  async next(context: Context): Promise<void> {
-    this.loading.start()
-    context.result = context.result?.finally(() => {
-      this.loading.end()
-    })
-    this.nextLink.next(context)
-  }
-}
-```
-
-And then register it in the chain of responsibility:
-
-```ts
-Archimedes.createChain([new LoadingLink(new Loading()), new ExecutorLink()])
-```
