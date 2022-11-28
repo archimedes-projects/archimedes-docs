@@ -30,19 +30,6 @@ yarn add @archimedes/arch -E
 </TabItem>
 </Tabs>
 
-:::important
-
-If you want to use cache-link and your framework mangles the name of the classes (like Angular does) you should either disable that option or avoid using that link. For example, to disable that option in Angular when you build the application set `NG_BUILD_MANGLE=false` in the package.json's script.
-
-```json
-"scripts": {
-  "build": "NG_BUILD_MANGLE=false ng build",
-},
-
-```
-
-:::
-
 ## Use cases
 
 In archimedes we differentiate between **queries** and **commands**.
@@ -351,7 +338,13 @@ This link caches the results for all queries with all parameters combination. To
 
 :::important
 
-The `executor-link` is always required, even if you use the `cache-link`.
+The `ExecutorLink` is always required, even if you use the `CacheLink`.
+
+:::
+
+:::important
+
+If you want to use `CacheLink` you should use `@UseCaseKey` decorator. To learn more about cache move to [cache section](#cache).
 
 :::
 
@@ -395,12 +388,26 @@ Archimedes.createChain([new LoadingLink(new Loading()), new ExecutorLink()])
 
 ## Cache
 
+:::important
+It's important to activate `emitDecoratorMetadata` to true in the `tsconfig.json` compiler's options. See the `examples` directory for more information.
+:::
+
+### UseCaseKey
+
+To manage properly the cache using `CacheLink` it is necessary to set a key that identifies each use case. To do this we must use the `UseCaseKey` decorator passing as parameter the name we want to give to our use case (we recommend using the same name of the class to simplify).
+
+```ts
+@UseCaseKey('GetTodosQry')
+export class GetTodosQry extends Query<Todo[]> {}
+```
+
 ### Invalidate cache
 
-You can automatically evict the cache of dependant use cases using the `InvalidateCache` decorator in conjunction with the `cache-link` link. If use case `a` depends on use case `b`, and use case `b` depends on use case `c` (`a` ➡ `b` ➡ `c`️) if we invalidate the cache of use case `a` we should invalidate the cache of use case `b` and `c` too. We should add this decorator to all use cases we want this handled.
+You can automatically invalidate the cache of dependant use cases using the `InvalidateCache` decorator in conjunction with the `CacheLink` link. If use case `a` depends on use case `b`, and use case `b` depends on use case `c` (`a` ➡ `b` ➡ `c`️) if we invalidate the cache of use case `a` we should invalidate the cache of use case `b` and `c` too. We should add this decorator to all use cases we want this handled.
 
 ```ts
 @InvalidateCache
+@UseCaseKey('AQry')
 export class AQry extends Query {
   constructor(private readonly bQry: BQry) {
     super()
@@ -412,19 +419,21 @@ export class AQry extends Query {
 }
 ```
 
-:::important
-It's important to activate `emitDecoratorMetadata` to true in the `tsconfig.json` compiler's options. See the `examples` directory for more information.
-:::
-
 ### Cache invalidations
 
-If you want to set that certain commands or queries invalidate the cache of other commands and queries you can set the cache invalidations the `CacheInvalidations` class:
+If you want to set that certain commands or queries invalidate the cache of other commands and queries you can set the cache invalidations with `CacheInvalidations.set` method. You should indicate the key of the use case that will invalidate the cache and the invalidations that this use case will perform when executed.
 
 ```ts
-CacheInvalidations.set(FooCmd.name, [BarQry.name])
+CacheInvalidations.set('CreateTodoCmd', ['GetTodosQry'])
 ```
 
-You can also use these invalidation policies:
+These invalidations can be a list of use case keys to invalidate when the first one is executed, for example:
+
+```ts
+CacheInvalidations.set('CreateTodoCmd', ['GetTodosQry', 'GetTodoByIdQry'])
+```
+
+Or you can also use some one of these invalidation policies:
 
 - ALL: The use case will invalidate all the cache of all the use cases
 - NO_CACHE: The use case will never be cached
@@ -432,4 +441,3 @@ You can also use these invalidation policies:
 ```ts
 CacheInvalidations.set(FooCmd.name, [InvalidationPolicy.ALL])
 ```
-
