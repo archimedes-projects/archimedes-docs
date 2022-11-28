@@ -2,7 +2,24 @@
 title: Migration guide
 ---
 
-## Migration Guide 2.0
+## To 2.2
+
+---
+
+### Use the new `@UseCaseKey` decorator
+
+If you are using the Archimedes cache link you will need to add this decorator for all use cases:
+
+```typescript
+@UseCaseKey('GetTodosQry')
+export class GetTodosQry extends Query<Todo[]> {}
+```
+
+Also you will need to change the references of your cache invalidations.
+
+To learn more about cache move to [arch cache section](./arch.mdx#cache).
+
+## To 2.0
 
 ---
 
@@ -53,8 +70,8 @@ An example of Angular provider injection change:
 
 ```typescript
 const ARCHIMEDES_PROVIDERS = [
-    { provide: CacheManager, useClass: CacheManager },
-    { provide: NotificationCenter, useClass: NotificationCenter }
+  { provide: CacheManager, useClass: CacheManager },
+  { provide: NotificationCenter, useClass: NotificationCenter }
 ]
 ```
 
@@ -62,8 +79,8 @@ const ARCHIMEDES_PROVIDERS = [
 
 ```typescript
 const ARCHIMEDES_PROVIDERS = [
-    { provide: CacheManager, useFactory: () => new CacheManager() },
-    { provide: NotificationCenter, useFactory: () => new NotificationCenter() }
+  { provide: CacheManager, useFactory: () => new CacheManager() },
+  { provide: NotificationCenter, useFactory: () => new NotificationCenter() }
 ]
 ```
 
