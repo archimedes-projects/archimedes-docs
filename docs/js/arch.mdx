@@ -190,7 +190,7 @@ await quxQry.execute(undefined, {
 })
 ```
 
-You can define your own execution options typings by creating a `index.d.ts` in the root of your project with the following contents:
+You can define your own execution options typings by creating a `archimedes.d.ts` in the root of your project with the following contents:
 
 ```ts
 import '@archimedes/arch'
@@ -199,6 +199,7 @@ declare module '@archimedes/arch' {
   interface ExecutionOptions {
     extraOption: string
     inlineError: boolean
+    invalidateCache: boolean
   }
 }
 ```
@@ -208,7 +209,6 @@ If you do so, you can have a type safe way to pass custom options:
 ```ts
 const quxQry = new QuxCmd()
 await quxQry.execute(undefined, {
-  inlineError: true,
   extraOption: 'foo'
 })
 ```
@@ -344,7 +344,7 @@ The `ExecutorLink` is always required, even if you use the `CacheLink`.
 
 :::important
 
-If you want to use `CacheLink` you should use `@UseCaseKey` decorator. To learn more about cache move to [cache section](#cache).
+If you want to use `CacheLink` you should use `@UseCaseKey` decorator in all your use cases (queries and commands). To learn more about cache move to [cache section](#cache).
 
 :::
 
@@ -401,7 +401,7 @@ To manage properly the cache using `CacheLink` it is necessary to set a key that
 export class GetTodosQry extends Query<Todo[]> {}
 ```
 
-### Invalidate cache
+### Invalidate cache decorator
 
 You can automatically invalidate the cache of dependant use cases using the `InvalidateCache` decorator in conjunction with the `CacheLink` link. If use case `a` depends on use case `b`, and use case `b` depends on use case `c` (`a` ➡ `b` ➡ `c`️) if we invalidate the cache of use case `a` we should invalidate the cache of use case `b` and `c` too. We should add this decorator to all use cases we want this handled.
 
@@ -440,4 +440,12 @@ Or you can also use some one of these invalidation policies:
 
 ```ts
 CacheInvalidations.set(FooCmd.name, [InvalidationPolicy.ALL])
+```
+
+### Invalidate cache in runtime
+
+Sometimes you want to execute a Query invalidating the cache for this specific execution, for example, refresh an email list. To do that, you can use `invalidateCache: true` in the execution options object. 
+
+```ts
+await this.getTodosQry.execute(undefined, { invalidateCache: true })
 ```
