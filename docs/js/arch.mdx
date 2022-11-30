@@ -344,7 +344,17 @@ The `ExecutorLink` is always required, even if you use the `CacheLink`.
 
 :::important
 
-If you want to use `CacheLink` you should use `@UseCaseKey` decorator in all your use cases (queries and commands). To learn more about cache move to [cache section](#cache).
+If you want to use `CacheLink` and your framework mangles the name of the classes (like Angular does) you should either disable that option or use the `@UseCaseKey` decorator in all your use cases (queries and commands).
+
+For example, to disable name mangling in Angular when you build the application set `NG_BUILD_MANGLE=false` in the package.json's script.
+
+```json
+"scripts": {
+  "build": "NG_BUILD_MANGLE=false ng build",
+},
+```
+
+To learn more about cache move to [cache section](#cache).
 
 :::
 
